@@ -125,7 +125,6 @@ compatibility() {
 print "Checking if the addon is compatible with your panel..."
 
 sleep 2
-   print "Compatible Version!"
 
 # Install Dependencies #
 dependencies() {
