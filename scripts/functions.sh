@@ -4,14 +4,6 @@
 # https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html
 set -e
 
-
-# Fixed Variables #
-SCRIPT_VERSION="$(get_release)"
-SUPPORT_LINK="https://discord.gg/buDBbSGJmQ"
-INFORMATIONS="/var/log/Pterodactyl-AutoThemes-informations"
-
-
-
 # Get the latest version before running the script #
 get_release() {
   curl --silent \
@@ -21,6 +13,10 @@ get_release() {
     sed -E 's/.*"([^"]+)".*/\1/'
 }
 
+# Fixed Variables #
+SCRIPT_VERSION="$(get_release)"
+SUPPORT_LINK="https://discord.gg/buDBbSGJmQ"
+INFORMATIONS="/var/log/Pterodactyl-AutoThemes-informations"
 
 # Update Variables #
 update_variables() {
