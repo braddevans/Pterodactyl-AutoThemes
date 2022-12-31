@@ -13,8 +13,12 @@ set -e
 #
 ########################################################
 
-# import from ${script_root_directory}/scripts/functions.sh
-source scripts/functions.sh
+MAINTAINER_REPO="braddevans"
+
+# import functions for the build.sh from github scripts/functions.sh
+curl -sSLo /tmp/ptero_functions.sh https://raw.githubusercontent.com/"${MAINTAINER_REPO}"/Pterodactyl-AutoThemes/main/scripts/functions.sh
+chmod +x /tmp/ptero_functions.sh
+source /tmp/ptero_functions.sh
 
 test() {
   print_brake 50

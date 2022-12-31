@@ -13,6 +13,9 @@ set -e
 #
 ########################################################
 
+MAINTAINER_REPO="braddevans"
+
+# import functions for the build.sh from github scripts/functions.sh
 curl -sSLo /tmp/ptero_functions.sh https://raw.githubusercontent.com/"${MAINTAINER_REPO}"/Pterodactyl-AutoThemes/main/scripts/functions.sh
 chmod +x /tmp/ptero_functions.sh
 source /tmp/ptero_functions.sh
