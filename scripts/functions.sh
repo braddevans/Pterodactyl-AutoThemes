@@ -17,7 +17,8 @@ get_release() {
 
 # Fixed Variables #
 GITHUB_STATUS_URL="https://www.githubstatus.com"
-SCRIPT_VERSION="$(get_release)"
+#SCRIPT_VERSION="$(get_release)"
+SCRIPT_VERSION="main"
 SUPPORT_LINK="https://discord.gg/buDBbSGJmQ"
 INFORMATIONS="/var/log/Pterodactyl-AutoThemes-informations"
 
