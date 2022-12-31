@@ -88,10 +88,6 @@ BackgroundVideo() {
   bash <(curl -s https://raw.githubusercontent.com/"${MAINTAINER_REPO}"/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version-1.x/BackgroundVideo/build.sh)
 }
 
-AnimatedGraphics() {
-  bash <(curl -s https://raw.githubusercontent.com/"${MAINTAINER_REPO}"/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version-1.x/AnimatedGraphics/build.sh)
-}
-
 while [ "$done" == false ]; do
   options=(
     "Restore Panel Backup (Restore your panel if you have problems or want to remove themes)"
@@ -101,7 +97,6 @@ while [ "$done" == false ]; do
     "Install Zing Theme (Only 1.11.2+)"
     "Install Flanco Theme (Only 1.11.2+)"
     "Install Background Video (Only 1.11.2+)"
-    "Install Animated Graphics (Only 1.11.2+)"
 
     \
     "Cancel Installation"
@@ -115,7 +110,6 @@ while [ "$done" == false ]; do
     "ZingTheme"
     "FlancoTheme"
     "BackgroundVideo"
-    "AnimatedGraphics"
 
     \
     "cancel"
