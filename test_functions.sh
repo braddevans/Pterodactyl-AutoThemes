@@ -37,7 +37,5 @@ find_pterodactyl
 if [ "$PTERO_INSTALL" == true ]; then
   print "Panel found, continuing test..."
   compatibility
-  dependencies
-  production
   test
 fi
