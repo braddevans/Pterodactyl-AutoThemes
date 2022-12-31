@@ -27,21 +27,21 @@ fi
 
 # Check Git #
 if [ -z "$SCRIPT_VERSION" ]; then
-  error "Could not get the version of the script using GitHub."
-  echo "* Please check on the site below if the 'API Requests' are as normal status."
+  print_error "Could not get the version of the script using GitHub."
+  print "* Please check on the site below if the 'API Requests' are as normal status."
   echo -e "${YELLOW}$(hyperlink "$GITHUB_STATUS_URL")${RESET}"
   exit 1
 fi
 
 # Check Curl #
 if ! [ -x "$(command -v curl)" ]; then
-  echo "* curl is required in order for this script to work."
-  echo "* install using apt (Debian and derivatives) or yum/dnf (CentOS)"
+  print "* curl is required in order for this script to work."
+  print "* install using apt (Debian and derivatives) or yum/dnf (CentOS)"
   exit 1
 fi
 
 cancel() {
-  echo
+  print
   echo -e "* ${RED}Installation Canceled!${RESET}"
   done=true
   exit 1
@@ -51,12 +51,12 @@ done=false
 
 echo
 print_brake 70
-echo "* Pterodactyl-AutoThemes Script @ $SCRIPT_VERSION"
-echo
-echo "* Copyright (C) 2021 - $(date +%Y), Ferks-FK."
-echo "* https://github.com/"${MAINTAINER_REPO}"/Pterodactyl-AutoThemes"
-echo
-echo "* This script is not associated with the official Pterodactyl Project."
+print "* Pterodactyl-AutoThemes Script @ $SCRIPT_VERSION"
+print
+print "* Copyright (C) 2021 - $(date +%Y), Ferks-FK."
+print "* https://github.com/"${MAINTAINER_REPO}"/Pterodactyl-AutoThemes"
+print
+print "* This script is not associated with the official Pterodactyl Project."
 print_brake 70
 echo
 
@@ -121,20 +121,20 @@ while [ "$done" == false ]; do
     "cancel"
   )
 
-  echo "* Which theme do you want to install?"
+  print "* Which theme do you want to install?"
   echo
 
   for i in "${!options[@]}"; do
-    echo "[$i] ${options[$i]}"
+    print "[$i] ${options[$i]}"
   done
 
   echo
   echo -n "* Input 0-$((${#actions[@]} - 1)): "
   read -r action
 
-  [ -z "$action" ] && error "Input is required" && continue
+  [ -z "$action" ] && print_error "Input is required" && continue
 
   valid_input=("$(for ((i = 0; i <= ${#actions[@]} - 1; i += 1)); do echo "${i}"; done)")
-  [[ ! " ${valid_input[*]} " =~ ${action} ]] && error "Invalid option"
+  [[ ! " ${valid_input[*]} " =~ ${action} ]] && print_error "Invalid option"
   [[ " ${valid_input[*]} " =~ ${action} ]] && done=true && eval "${actions[$action]}"
 done
