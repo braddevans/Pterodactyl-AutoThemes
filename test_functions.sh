@@ -14,7 +14,7 @@ set -e
 ########################################################
 
 # import from ${script_root_directory}/scripts/functions.sh
-source ../../../scripts/functions.sh
+source scripts/functions.sh
 
 
 test() {
