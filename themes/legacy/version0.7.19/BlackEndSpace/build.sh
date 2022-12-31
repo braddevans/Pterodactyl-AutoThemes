@@ -124,7 +124,7 @@ print_brake 25
 cd /var/www/pterodactyl
 mkdir -p temp
 cd temp
-curl -sSLo BlackEndSpace.tar.gz https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/${SCRIPT_VERSION}/themes/version0.7.19/BlackEndSpace/BlackEndSpace.tar.gz
+curl -sSLo BlackEndSpace.tar.gz https://raw.githubusercontent.com/"${MAINTAINER_REPO}"/Pterodactyl-AutoThemes/${SCRIPT_VERSION}/themes/version0.7.19/BlackEndSpace/BlackEndSpace.tar.gz
 tar -xzvf BlackEndSpace.tar.gz
 cd BlackEndSpace
 cp -rf -- * /var/www/pterodactyl

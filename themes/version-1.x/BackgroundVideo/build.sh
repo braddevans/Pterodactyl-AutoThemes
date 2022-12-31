@@ -179,7 +179,7 @@ download_files() {
   print "Downloading files..."
 
   mkdir -p $PTERO/temp
-  curl -sSLo $PTERO/temp/BackgroundVideo.tar.gz https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/BackgroundVideo/BackgroundVideo.tar.gz
+  curl -sSLo $PTERO/temp/BackgroundVideo.tar.gz https://raw.githubusercontent.com/"${MAINTAINER_REPO}"/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version-1.x/BackgroundVideo/BackgroundVideo.tar.gz
   tar -xzvf $PTERO/temp/BackgroundVideo.tar.gz -C $PTERO/temp
   cp -rf -- $PTERO/temp/BackgroundVideo/* $PTERO
   rm -rf $PTERO/temp

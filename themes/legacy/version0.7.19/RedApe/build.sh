@@ -124,7 +124,7 @@ print_brake 25
 cd /var/www/pterodactyl
 mkdir -p temp
 cd temp
-curl -sSLo RedApe.tar.gz https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/${SCRIPT_VERSION}/themes/version0.7.19/RedApe/RedApe.tar.gz
+curl -sSLo RedApe.tar.gz https://raw.githubusercontent.com/"${MAINTAINER_REPO}"/Pterodactyl-AutoThemes/${SCRIPT_VERSION}/themes/version0.7.19/RedApe/RedApe.tar.gz
 tar -xzvf RedApe.tar.gz
 cd RedApe
 cp -rf -- * /var/www/pterodactyl

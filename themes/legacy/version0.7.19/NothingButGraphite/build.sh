@@ -124,7 +124,7 @@ print_brake 25
 cd /var/www/pterodactyl
 mkdir -p temp
 cd temp
-curl -sSLo NothingButGraphite.tar.gz https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/${SCRIPT_VERSION}/themes/version0.7.19/NothingButGraphite/NothingButGraphite.tar.gz
+curl -sSLo NothingButGraphite.tar.gz https://raw.githubusercontent.com/"${MAINTAINER_REPO}"/Pterodactyl-AutoThemes/${SCRIPT_VERSION}/themes/version0.7.19/NothingButGraphite/NothingButGraphite.tar.gz
 tar -xzvf NothingButGraphite.tar.gz
 cd NothingButGraphite
 cp -rf -- * /var/www/pterodactyl

@@ -177,7 +177,7 @@ download_files() {
   print "Downloading files..."
 
   mkdir -p $PTERO/temp
-  curl -sSLo $PTERO/temp/AnimatedGraphics.tar.gz https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/AnimatedGraphics/AnimatedGraphics.tar.gz
+  curl -sSLo $PTERO/temp/AnimatedGraphics.tar.gz https://raw.githubusercontent.com/"${MAINTAINER_REPO}"/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version-1.x/AnimatedGraphics/AnimatedGraphics.tar.gz
   tar -xzvf $PTERO/temp/AnimatedGraphics.tar.gz -C $PTERO/temp
   cp -rf -- $PTERO/temp/AnimatedGraphics/* $PTERO
   rm -rf $PTERO/temp

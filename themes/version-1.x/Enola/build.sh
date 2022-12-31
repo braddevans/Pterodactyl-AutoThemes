@@ -177,7 +177,7 @@ download_files() {
   print "Downloading files..."
 
   mkdir -p $PTERO/temp
-  curl -sSLo $PTERO/temp/Enola.tar.gz https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/Enola/Enola.tar.gz
+  curl -sSLo $PTERO/temp/Enola.tar.gz https://raw.githubusercontent.com/"${MAINTAINER_REPO}"/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version-1.x/Enola/Enola.tar.gz
   tar -xzvf $PTERO/temp/Enola.tar.gz -C $PTERO/temp
   cp -rf -- $PTERO/temp/Enola/* $PTERO
   rm -rf $PTERO/temp

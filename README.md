@@ -22,7 +22,7 @@ group [Pterodacyl-AutoThemes Support](https://discord.gg/buDBbSGJmQ)
 Just run the following command as root user.
 
 ```
-bash <(curl -s https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/main/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/"${MAINTAINER_REPO}"/Pterodactyl-AutoThemes/main/install.sh)
 ```
 
 <h1 align="center">Attention</h1>

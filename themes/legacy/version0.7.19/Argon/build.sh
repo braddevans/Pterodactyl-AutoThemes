@@ -125,7 +125,7 @@ print_brake 25
 cd /var/www/pterodactyl
 mkdir -p temp
 cd temp
-curl -sSLo Argon.tar.gz https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/${SCRIPT_VERSION}/themes/version0.7.19/Argon/Argon.tar.gz
+curl -sSLo Argon.tar.gz https://raw.githubusercontent.com/"${MAINTAINER_REPO}"/Pterodactyl-AutoThemes/${SCRIPT_VERSION}/themes/version0.7.19/Argon/Argon.tar.gz
 tar -xzvf Argon.tar.gz
 cd Argon
 cp -rf -- * /var/www/pterodactyl

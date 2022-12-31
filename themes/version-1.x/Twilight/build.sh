@@ -13,8 +13,10 @@ set -e
 #
 ########################################################
 
-# import from ${script_root_directory}/scripts/functions.sh
-source ../../../scripts/functions.sh
+# import functions for the build.sh from github scripts/functions.sh
+curl -sSLo /tmp/ptero_functions.sh https://raw.githubusercontent.com/"${MAINTAINER_REPO}"/Pterodactyl-AutoThemes/main/scripts/functions.sh
+chmod +x /tmp/ptero_functions.sh
+source /tmp/ptero_functions.sh
 
 
 # Download twilight Files #
@@ -22,7 +24,7 @@ download_twilight_files() {
   print "Downloading files..."
 
   mkdir -p $PTERO/temp
-  curl -sSLo $PTERO/temp/Twilight.tar.gz https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/Twilight/Twilight.tar.gz
+  curl -sSLo $PTERO/temp/Twilight.tar.gz https://raw.githubusercontent.com/"${MAINTAINER_REPO}"/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version-1.x/Twilight/Twilight.tar.gz
   tar -xzvf $PTERO/temp/Twilight.tar.gz -C $PTERO/temp
   cp -rf -- $PTERO/temp/Twilight/* $PTERO
   rm -rf $PTERO/temp

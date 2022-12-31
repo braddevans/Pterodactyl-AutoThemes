@@ -16,7 +16,6 @@ set -e
 # import from ${script_root_directory}/scripts/functions.sh
 source scripts/functions.sh
 
-
 test() {
   print_brake 50
   echo
@@ -26,7 +25,7 @@ test() {
   echo -e "${GREEN}* ${YELLOW}ptero_install: ${PTERO_INSTALL}${GREEN}."
   echo -e "${GREEN}* ${YELLOW}ptero_version: ${PANEL_VERSION}${GREEN}."
   echo -e "${GREEN}* ${YELLOW}ptero_dir: ${PTERO}${GREEN}."
-  echo -e "${GREEN}* ${YELLOW}ptero_compatible:${IS_COMPATIBLE_VERSION}${GREEN}."
+  echo -e "${GREEN}* ${YELLOW}ptero_compatible: ${IS_COMPATIBLE_VERSION}${GREEN}."
   echo -e "* Discord Support group: ${YELLOW}$(hyperlink "$SUPPORT_LINK")${RESET}"
   echo
   print_brake 50

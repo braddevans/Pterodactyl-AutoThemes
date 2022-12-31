@@ -4,16 +4,19 @@
 # https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html
 set -e
 
+MAINTAINER_REPO="braddevans"
+
 # Get the latest version before running the script #
 get_release() {
   curl --silent \
   -H "Accept: application/vnd.github.v3+json" \
-  https://api.github.com/repos/Ferks-FK/Pterodactyl-AutoThemes/releases/latest |
+  https://api.github.com/repos/"${MAINTAINER_REPO}"/Pterodactyl-AutoThemes/releases/latest |
     grep '"tag_name":' |
     sed -E 's/.*"([^"]+)".*/\1/'
 }
 
 # Fixed Variables #
+GITHUB_STATUS_URL="https://www.githubstatus.com"
 SCRIPT_VERSION="$(get_release)"
 SUPPORT_LINK="https://discord.gg/buDBbSGJmQ"
 INFORMATIONS="/var/log/Pterodactyl-AutoThemes-informations"

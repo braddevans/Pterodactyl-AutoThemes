@@ -124,7 +124,7 @@ print_brake 25
 cd /var/www/pterodactyl
 mkdir -p temp
 cd temp
-curl -sSLo BlueBrick.tar.gz https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/${SCRIPT_VERSION}/themes/version0.7.19/BlueBrick/BlueBrick.tar.gz
+curl -sSLo BlueBrick.tar.gz https://raw.githubusercontent.com/"${MAINTAINER_REPO}"/Pterodactyl-AutoThemes/${SCRIPT_VERSION}/themes/version0.7.19/BlueBrick/BlueBrick.tar.gz
 tar -xzvf BlueBrick.tar.gz
 cd BlueBrick
 cp -rf -- * /var/www/pterodactyl
