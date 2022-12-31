@@ -1,11 +1,13 @@
 ## This is a guide to teach you how to install old themes on your old panel.
 
-
 1 - Start by downloading a copy of the desired theme installer with the following command:
+
 ```
 curl -O https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/v0.8.2/themes/version0.7.19/YOUR-THEME/build.sh
 ```
-**Note that at the end of the link it says `YOUR-THEME`, change this part to the name of the theme you want to install.**
+
+**Note that at the end of the link it says `YOUR-THEME`, change this part to the name of the theme you want to install.
+**
 
 2 - After the file is downloaded, run the following command:
 `bash build.sh`

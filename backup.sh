@@ -3,7 +3,7 @@
 set -e
 
 ########################################################
-# 
+#
 #         Pterodactyl-AutoThemes Installation
 #
 #         Created and maintained by Ferks-FK
@@ -19,10 +19,10 @@ SUPPORT_LINK="https://discord.gg/buDBbSGJmQ"
 #### Update Variables ####
 
 update_variables() {
-INFORMATIONS="/var/log/Pterodactyl-AutoThemes-informations"
-DET="$PTERO/public/themes/pterodactyl/css/admin.css"
-ZING="$PTERO/resources/scripts/components/SidePanel.tsx"
-if [ -f "${INFORMATIONS}/background.txt" ]; then BACKGROUND="$(cat "${INFORMATIONS}/background.txt")"; fi
+  INFORMATIONS="/var/log/Pterodactyl-AutoThemes-informations"
+  DET="$PTERO/public/themes/pterodactyl/css/admin.css"
+  ZING="$PTERO/resources/scripts/components/SidePanel.tsx"
+  if [ -f "${INFORMATIONS}/background.txt" ]; then BACKGROUND="$(cat "${INFORMATIONS}/background.txt")"; fi
 }
 
 print_brake() {
@@ -62,10 +62,10 @@ RED='\033[0;31m'
 #### Find where pterodactyl is installed ####
 
 find_pterodactyl() {
-print "Looking for your pterodactyl installation..."
+  print "Looking for your pterodactyl installation..."
 
-sleep 2
-if [ -d "/var/www/pterodactyl" ]; then
+  sleep 2
+  if [ -d "/var/www/pterodactyl" ]; then
     PTERO_INSTALL=true
     PTERO="/var/www/pterodactyl"
   elif [ -d "/var/www/panel" ]; then
@@ -76,43 +76,43 @@ if [ -d "/var/www/pterodactyl" ]; then
     PTERO="/var/www/ptero"
   else
     PTERO_INSTALL=false
-fi
-# Update the variables after detection of the pterodactyl installation #
-update_variables
+  fi
+  # Update the variables after detection of the pterodactyl installation #
+  update_variables
 }
 
 #### Deletes all files installed by the script ####
 
 delete_files() {
-#### THEMES DRACULA, ENOLA AND TWILIGHT ####
-if [ -f "$DET" ]; then
-  rm -rf "$DET"
-  rm -rf "$PTERO/resources/scripts/user.css"
-fi
-#### THEMES DRACULA, ENOLA AND TWILIGHT ####
+  #### THEMES DRACULA, ENOLA AND TWILIGHT ####
+  if [ -f "$DET" ]; then
+    rm -rf "$DET"
+    rm -rf "$PTERO/resources/scripts/user.css"
+  fi
+  #### THEMES DRACULA, ENOLA AND TWILIGHT ####
 
-#### THEME ZINGTHEME ####
-if [ -f "$ZING" ]; then
-  rm -rf "$ZING"
-  rm -rf "$PTERO/resources/scripts/components/server/files/FileViewer.tsx"
-fi
-#### THEME ZINGTHEME ####
+  #### THEME ZINGTHEME ####
+  if [ -f "$ZING" ]; then
+    rm -rf "$ZING"
+    rm -rf "$PTERO/resources/scripts/components/server/files/FileViewer.tsx"
+  fi
+  #### THEME ZINGTHEME ####
 
-#### BACKGROUND VIDEO ####
-if [ -f "$PTERO/public/$BACKGROUND" ]; then
-  rm -rf "$PTERO/public/$BACKGROUND"
-  rm -rf "$PTERO/resources/scripts/user.css"
-  rm -rf "$INFORMATIONS"
-fi
-#### BACKGROUND VIDEO ####
+  #### BACKGROUND VIDEO ####
+  if [ -f "$PTERO/public/$BACKGROUND" ]; then
+    rm -rf "$PTERO/public/$BACKGROUND"
+    rm -rf "$PTERO/resources/scripts/user.css"
+    rm -rf "$INFORMATIONS"
+  fi
+  #### BACKGROUND VIDEO ####
 }
 
 #### Restore Backup ####
 
 restore() {
-print "Checking for a backup..."
+  print "Checking for a backup..."
 
-if [ -d "$PTERO/PanelBackup[Auto-Themes]" ]; then
+  if [ -d "$PTERO/PanelBackup[Auto-Themes]" ]; then
     cd "$PTERO/PanelBackup[Auto-Themes]"
     tar -xzvf "$PTERO/PanelBackup[Auto-Themes]/PanelBackup[Auto-Themes].tar.gz"
     rm -rf "$PTERO/PanelBackup[Auto-Themes]/PanelBackup[Auto-Themes].tar.gz"
@@ -121,41 +121,41 @@ if [ -d "$PTERO/PanelBackup[Auto-Themes]" ]; then
   else
     print_error "There was no backup to restore, Aborting..."
     exit 1
-fi
+  fi
 }
 
 bye() {
-print_brake 50
-echo
-echo -e "${GREEN}* Backup restored successfully!"
-echo -e "* Thank you for using this script."
-echo -e "* Support group: ${YELLOW}$(hyperlink "$SUPPORT_LINK")${RESET}"
-echo
-print_brake 50
+  print_brake 50
+  echo
+  echo -e "${GREEN}* Backup restored successfully!"
+  echo -e "* Thank you for using this script."
+  echo -e "* Support group: ${YELLOW}$(hyperlink "$SUPPORT_LINK")${RESET}"
+  echo
+  print_brake 50
 }
 
 #### Exec Script ####
 find_pterodactyl
 if [ "$PTERO_INSTALL" == true ]; then
-    print "Installation of the panel found, continuing the backup..."
+  print "Installation of the panel found, continuing the backup..."
+  delete_files
+  restore
+  bye
+elif [ "$PTERO_INSTALL" == false ]; then
+  print_warning "The installation of your panel could not be located."
+  echo -e "* ${GREEN}EXAMPLE${RESET}: ${YELLOW}/var/www/mypanel${RESET}"
+  echo -ne "* Enter the pterodactyl installation directory manually: "
+  read -r MANUAL_DIR
+  if [ -d "$MANUAL_DIR" ]; then
+    print "Directory has been found!"
+    PTERO="$MANUAL_DIR"
+    echo "$MANUAL_DIR" >>"$INFORMATIONS/custom_directory.txt"
+    update_variables
     delete_files
     restore
     bye
-  elif [ "$PTERO_INSTALL" == false ]; then
-    print_warning "The installation of your panel could not be located."
-    echo -e "* ${GREEN}EXAMPLE${RESET}: ${YELLOW}/var/www/mypanel${RESET}"
-    echo -ne "* Enter the pterodactyl installation directory manually: "
-    read -r MANUAL_DIR
-    if [ -d "$MANUAL_DIR" ]; then
-        print "Directory has been found!"
-        PTERO="$MANUAL_DIR"
-        echo "$MANUAL_DIR" >> "$INFORMATIONS/custom_directory.txt"
-        update_variables
-        delete_files
-        restore
-        bye
-      else
-        print_error "The directory you entered does not exist."
-        find_pterodactyl
-    fi
+  else
+    print_error "The directory you entered does not exist."
+    find_pterodactyl
+  fi
 fi

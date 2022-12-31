@@ -14,11 +14,11 @@ set -e
 
 # Get the latest version before running the script #
 get_release() {
-curl --silent \
+  curl --silent \
   -H "Accept: application/vnd.github.v3+json" \
   https://api.github.com/repos/Ferks-FK/Pterodactyl-AutoThemes/releases/latest |
-  grep '"tag_name":' |
-  sed -E 's/.*"([^"]+)".*/\1/'
+    grep '"tag_name":' |
+    sed -E 's/.*"([^"]+)".*/\1/'
 }
 
 GITHUB_STATUS_URL="https://www.githubstatus.com"
@@ -68,10 +68,10 @@ if ! [ -x "$(command -v curl)" ]; then
 fi
 
 cancel() {
-echo
-echo -e "* ${RED}Installation Canceled!${RESET}"
-done=true
-exit 1
+  echo
+  echo -e "* ${RED}Installation Canceled!${RESET}"
+  done=true
+  exit 1
 }
 
 done=false
@@ -88,37 +88,36 @@ print_brake 70
 echo
 
 Backup() {
-bash <(curl -s https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/backup.sh)
+  bash <(curl -s https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/backup.sh)
 }
 
 Dracula() {
-bash <(curl -s https://raw.githubusercontent.com/DavidGlitch04/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/Dracula/build.sh)
+  bash <(curl -s https://raw.githubusercontent.com/DavidGlitch04/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/Dracula/build.sh)
 }
 
 Enola() {
-bash <(curl -s https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/Enola/build.sh)
+  bash <(curl -s https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/Enola/build.sh)
 }
 
 Twilight() {
-bash <(curl -s https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/Twilight/build.sh)
+  bash <(curl -s https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/Twilight/build.sh)
 }
 
 ZingTheme() {
-bash <(curl -s https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/ZingTheme/build.sh)
+  bash <(curl -s https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/ZingTheme/build.sh)
 }
 
 FlancoTheme() {
-bash <(curl -s https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/FlancoTheme/build.sh)
+  bash <(curl -s https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/FlancoTheme/build.sh)
 }
 
 BackgroundVideo() {
-bash <(curl -s https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/BackgroundVideo/build.sh)
+  bash <(curl -s https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/BackgroundVideo/build.sh)
 }
 
 AnimatedGraphics() {
-bash <(curl -s https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/AnimatedGraphics/build.sh)
+  bash <(curl -s https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/AnimatedGraphics/build.sh)
 }
-
 
 while [ "$done" == false ]; do
   options=(
@@ -130,11 +129,11 @@ while [ "$done" == false ]; do
     "Install Flanco Theme (Only 1.11.2+)"
     "Install Background Video (Only 1.11.2+)"
     "Install Animated Graphics (Only 1.11.2+)"
-    
-    
+
+    \
     "Cancel Installation"
   )
-  
+
   actions=(
     "Backup"
     "Dracula"
@@ -144,24 +143,24 @@ while [ "$done" == false ]; do
     "FlancoTheme"
     "BackgroundVideo"
     "AnimatedGraphics"
-    
-    
+
+    \
     "cancel"
   )
-  
+
   echo "* Which theme do you want to install?"
   echo
-  
+
   for i in "${!options[@]}"; do
     echo "[$i] ${options[$i]}"
   done
-  
+
   echo
   echo -n "* Input 0-$((${#actions[@]} - 1)): "
   read -r action
-  
+
   [ -z "$action" ] && error "Input is required" && continue
-  
+
   valid_input=("$(for ((i = 0; i <= ${#actions[@]} - 1; i += 1)); do echo "${i}"; done)")
   [[ ! " ${valid_input[*]} " =~ ${action} ]] && error "Invalid option"
   [[ " ${valid_input[*]} " =~ ${action} ]] && done=true && eval "${actions[$action]}"

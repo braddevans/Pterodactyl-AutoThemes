@@ -4,7 +4,7 @@
 set -e
 
 ########################################################
-# 
+#
 #         Pterodactyl-AutoThemes Installation
 #
 #         Created and maintained by Ferks-FK
@@ -15,11 +15,11 @@ set -e
 
 # Get the latest version before running the script #
 get_release() {
-curl --silent \
+  curl --silent \
   -H "Accept: application/vnd.github.v3+json" \
   https://api.github.com/repos/Ferks-FK/Pterodactyl-AutoThemes/releases/latest |
-  grep '"tag_name":' |
-  sed -E 's/.*"([^"]+)".*/\1/'
+    grep '"tag_name":' |
+    sed -E 's/.*"([^"]+)".*/\1/'
 }
 
 # Fixed Variables #
@@ -28,8 +28,8 @@ SUPPORT_LINK="https://discord.gg/buDBbSGJmQ"
 
 # Update Variables #
 update_variables() {
-CONFIG_FILE="$PTERO/config/app.php"
-PANEL_VERSION="$(grep "'version'" "$CONFIG_FILE" | cut -c18-25 | sed "s/[',]//g")"
+  CONFIG_FILE="$PTERO/config/app.php"
+  PANEL_VERSION="$(grep "'version'" "$CONFIG_FILE" | cut -c18-25 | sed "s/[',]//g")"
 }
 
 # Visual Functions #
@@ -100,10 +100,10 @@ check_distro() {
 
 # Find where pterodactyl is installed #
 find_pterodactyl() {
-print "Looking for your pterodactyl installation..."
+  print "Looking for your pterodactyl installation..."
 
-sleep 2
-if [ -d "/var/www/pterodactyl" ]; then
+  sleep 2
+  if [ -d "/var/www/pterodactyl" ]; then
     PTERO_INSTALL=true
     PTERO="/var/www/pterodactyl"
   elif [ -d "/var/www/panel" ]; then
@@ -114,80 +114,80 @@ if [ -d "/var/www/pterodactyl" ]; then
     PTERO="/var/www/ptero"
   else
     PTERO_INSTALL=false
-fi
-# Update the variables after detection of the pterodactyl installation #
-update_variables
+  fi
+  # Update the variables after detection of the pterodactyl installation #
+  update_variables
 }
 
 # Verify Compatibility #
 compatibility() {
-print "Checking if the addon is compatible with your panel..."
+  print "Checking if the addon is compatible with your panel..."
 
-sleep 2
-if [ "$PANEL_VERSION" == "1.11.2" ]; then
+  sleep 2
+  if [ "$PANEL_VERSION" == "1.11.2" ]; then
     print "Compatible Version!"
   else
     print_error "Incompatible Version!"
     exit 1
-fi
+  fi
 }
 
 # Install Dependencies #
 dependencies() {
-print "Installing dependencies..."
+  print "Installing dependencies..."
 
-if node -v &>/dev/null; then
+  if node -v &>/dev/null; then
     print "The dependencies are already installed, skipping this step..."
   else
     case "$OS" in
-      debian | ubuntu)
-        curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && apt-get install -y nodejs
+    debian | ubuntu)
+      curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && apt-get install -y nodejs
       ;;
-      centos)
-        [ "$OS_VER_MAJOR" == "7" ] && curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash - && sudo yum install -y nodejs yarn
-        [ "$OS_VER_MAJOR" == "8" ] && curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash - && sudo dnf install -y nodejs
+    centos)
+      [ "$OS_VER_MAJOR" == "7" ] && curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash - && sudo yum install -y nodejs yarn
+      [ "$OS_VER_MAJOR" == "8" ] && curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash - && sudo dnf install -y nodejs
       ;;
     esac
-fi
+  fi
 }
 
 # Panel Backup #
 backup() {
-print "Performing security backup..."
+  print "Performing security backup..."
 
-if [ -d "$PTERO/PanelBackup[Auto-Themes]" ]; then
+  if [ -d "$PTERO/PanelBackup[Auto-Themes]" ]; then
     print "There is already a backup, skipping step..."
   else
     cd $PTERO
     if [ -d "$PTERO/node_modules" ]; then
-        tar -czvf "PanelBackup[Auto-Themes].tar.gz" --exclude "node_modules" -- * .env
-        mkdir -p "$PTERO/PanelBackup[Auto-Themes]"
-        mv "$PTERO/PanelBackup[Auto-Themes].tar.gz" "$PTERO/PanelBackup[Auto-Themes]"
-      else
-        tar -czvf "PanelBackup[Auto-Themes].tar.gz" -- * .env
-        mkdir -p "$PTERO/PanelBackup[Auto-Themes]"
-        mv "$PTERO/PanelBackup[Auto-Themes].tar.gz" "$PTERO/PanelBackup[Auto-Themes]"
+      tar -czvf "PanelBackup[Auto-Themes].tar.gz" --exclude "node_modules" -- * .env
+      mkdir -p "$PTERO/PanelBackup[Auto-Themes]"
+      mv "$PTERO/PanelBackup[Auto-Themes].tar.gz" "$PTERO/PanelBackup[Auto-Themes]"
+    else
+      tar -czvf "PanelBackup[Auto-Themes].tar.gz" -- * .env
+      mkdir -p "$PTERO/PanelBackup[Auto-Themes]"
+      mv "$PTERO/PanelBackup[Auto-Themes].tar.gz" "$PTERO/PanelBackup[Auto-Themes]"
     fi
-fi
+  fi
 }
 
 # Download Files #
 download_files() {
-print "Downloading files..."
+  print "Downloading files..."
 
-mkdir -p $PTERO/temp
-curl -sSLo $PTERO/temp/FlancoTheme.tar.gz https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/FlancoTheme/FlancoTheme.tar.gz
-tar -xzvf $PTERO/temp/FlancoTheme.tar.gz -C $PTERO/temp
-cp -rf -- $PTERO/temp/FlancoTheme/* $PTERO
-rm -rf $PTERO/temp
+  mkdir -p $PTERO/temp
+  curl -sSLo $PTERO/temp/FlancoTheme.tar.gz https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/FlancoTheme/FlancoTheme.tar.gz
+  tar -xzvf $PTERO/temp/FlancoTheme.tar.gz -C $PTERO/temp
+  cp -rf -- $PTERO/temp/FlancoTheme/* $PTERO
+  rm -rf $PTERO/temp
 }
 
 # Panel Production #
 production() {
-print "Producing panel..."
-print_warning "This process takes a few minutes, please do not cancel it."
+  print "Producing panel..."
+  print_warning "This process takes a few minutes, please do not cancel it."
 
-if [ -d "$PTERO/node_modules" ]; then
+  if [ -d "$PTERO/node_modules" ]; then
     yarn --cwd $PTERO add @emotion/react
     yarn --cwd $PTERO build:production
   else
@@ -195,50 +195,49 @@ if [ -d "$PTERO/node_modules" ]; then
     yarn --cwd $PTERO install
     yarn --cwd $PTERO add @emotion/react
     yarn --cwd $PTERO build:production
-fi
+  fi
 }
 
 bye() {
-print_brake 50
-echo
-echo -e "${GREEN}* The theme ${YELLOW}Flanco Theme${GREEN} was successfully installed."
-echo -e "* A security backup of your panel has been created."
-echo -e "* Thank you for using this script."
-echo -e "* Support group: ${YELLOW}$(hyperlink "$SUPPORT_LINK")${RESET}"
-echo
-print_brake 50
+  print_brake 50
+  echo
+  echo -e "${GREEN}* The theme ${YELLOW}Flanco Theme${GREEN} was successfully installed."
+  echo -e "* A security backup of your panel has been created."
+  echo -e "* Thank you for using this script."
+  echo -e "* Support group: ${YELLOW}$(hyperlink "$SUPPORT_LINK")${RESET}"
+  echo
+  print_brake 50
 }
 
 # Exec Script #
 check_distro
 find_pterodactyl
 if [ "$PTERO_INSTALL" == true ]; then
-    print "Installation of the panel found, continuing the installation..."
+  print "Installation of the panel found, continuing the installation..."
 
+  compatibility
+  dependencies
+  backup
+  download_files
+  production
+  bye
+elif [ "$PTERO_INSTALL" == false ]; then
+  print_warning "The installation of your panel could not be located."
+  echo -e "* ${GREEN}EXAMPLE${RESET}: ${YELLOW}/var/www/mypanel${RESET}"
+  echo -ne "* Enter the pterodactyl installation directory manually: "
+  read -r MANUAL_DIR
+  if [ -d "$MANUAL_DIR" ]; then
+    print "Directory has been found!"
+    PTERO="$MANUAL_DIR"
+    update_variables
     compatibility
     dependencies
     backup
     download_files
     production
     bye
-  elif [ "$PTERO_INSTALL" == false ]; then
-    print_warning "The installation of your panel could not be located."
-    echo -e "* ${GREEN}EXAMPLE${RESET}: ${YELLOW}/var/www/mypanel${RESET}"
-    echo -ne "* Enter the pterodactyl installation directory manually: "
-    read -r MANUAL_DIR
-    if [ -d "$MANUAL_DIR" ]; then
-        print "Directory has been found!"
-        PTERO="$MANUAL_DIR"
-        update_variables
-        compatibility
-        dependencies
-        backup
-        download_files
-        production
-        bye
-      else
-        print_error "The directory you entered does not exist."
-        find_pterodactyl
-    fi
+  else
+    print_error "The directory you entered does not exist."
+    find_pterodactyl
+  fi
 fi
-
